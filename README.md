@@ -55,7 +55,9 @@ This application is deployed on Heroku. [Click here](LINK-TO-DEPLOYED-APPLICATIO
 
 ## Screenshot
 
-![Screenshot of Recipe Sharing Web Application](LINK-TO-SCREENSHOT)
+![jpeg_image-4ee0-a9d2-99-0_720](https://github.com/Artemis051/Recipe-Sharing-App/assets/145396887/058cde3d-4a43-4cb1-913e-82f102dd2e14)
+
+
 
 ## Credits
 
