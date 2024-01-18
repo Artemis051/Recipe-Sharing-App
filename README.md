@@ -61,7 +61,7 @@ This application is deployed on Heroku. [Click here](LINK-TO-DEPLOYED-APPLICATIO
 
 ## Credits
 
-Developed by [Your Name], [Year]. Feel free to contact me at [Your Email] for any questions or feedback.
+Developed by @Artemis051 , @nrasch86 , @KateRedkina , @TarunPara , @kahunasfinest
 
 ## License
 
