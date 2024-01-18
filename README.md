@@ -14,7 +14,6 @@ As a Foodie, I desire a website where I can catalog my own recipes and delve int
 - Dynamic web pages rendered with Handlebars.js template engine.
 - A MySQL database with Sequelize ORM for efficient data handling.
 - GET and POST routes to retrieve and add recipes.
-- Integration of at least one novel library, package, or technology beyond the course curriculum.
 - MVC paradigm for organized folder structure.
 - User authentication using express-session and cookies.
 - Security measures for API keys and sensitive data via environment variables.
