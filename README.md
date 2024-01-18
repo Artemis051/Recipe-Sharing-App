@@ -65,5 +65,7 @@ Developed by @Artemis051 , @nrasch86 , @KateRedkina , @TarunPara , @kahunasfines
 
 ## License
 
-This project is licensed under the [License Name].
+This project is licensed under the MIT License.
+
+Copyright (c) 2024 Artemis051
 
