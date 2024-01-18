@@ -1,4 +1,4 @@
-# Recipe Sharing Web Application
+# Melting Pot: Recipe Sharing Web Application
 
 ## Description
 
