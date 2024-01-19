@@ -1,0 +1,31 @@
+{
+    "name": "melting-pot",
+    "version": "1.0.0",
+    "description": "A web application that allows users to post recipes as well as explore recipes within a user-expanding database. ",
+    "main": "server.js", 
+    "scripts": {
+      "start": "node server.js" 
+    },
+    "dependencies": {
+      "express": "^4.17.1",
+      "sequelize": "^6.3.5"
+    },
+
+    "engines": {
+      "node": ">=14.0.0" 
+    },
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/Artemis051/Recipe-Sharing-App"
+    },
+    "keywords": [
+      "node",
+      "express",
+      "sequelize"
+      
+    ],
+    "license": "MIT",
+    "authors": "@Artemis051 , @nrasch86 , @KateRedkina , @TarunPara , @kahunasfinest"
+   
+  }
+  
