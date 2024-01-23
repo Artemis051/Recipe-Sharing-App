@@ -19,3 +19,9 @@ app.use(routes);
 app.listen(PORT, function() {
   console.log('Server listening on: http://localhost:' + PORT);
 });
+
+// Spoonacular API Routing
+const recipeRoutes = require('./routes/recipes');
+
+app.use('/api/recipes', recipeRoutes);
+
