@@ -2,13 +2,12 @@ const express = require('express');
 const router = express.Router();
 const recipeModel = require('../models/recipe');
 
-// Define routes for recipe operations
+// Define routes for recipe functions
 router.get('/recipes', (req, res) => {
-  // Logic to fetch and display recipes
+  // get and display recipe
 });
 
-router.post('/recipes', (req, res) => {
-  // Logic to create a new recipe
+router.post('/recipes', (req, res) => { //create new recipe
 });
 
 module.exports = router;
