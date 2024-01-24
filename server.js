@@ -41,6 +41,8 @@ app.use('/dashboard', authMiddleware, dashboardRoutes);
 const recipeRoutes = require('./routes/recipes.js');  
 app.use('/api/recipes', recipeRoutes);
 
+
+
 // Sync the database and start the server
 sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => {
