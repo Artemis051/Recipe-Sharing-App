@@ -1,12 +1,18 @@
 const express = require('express');
+const exphbs = require('express-handlebars');
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;  // Change the port to 4000 or any other port you prefer
 const apiKey = process.env.SPOONACULAR_API_KEY;
 
-
 // Set up Handlebars
-const exphbs = require('express-handlebars');
-app.engine('handlebars', exphbs());
+const hbs = exphbs.create({
+  defaultLayout: 'main',
+  extname: '.handlebars',
+  layoutsDir: __dirname + '/views/layouts/',
+  partialsDir: __dirname + '/views/partials/'
+});
+
+app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
 // Serve static files from the public directory
@@ -21,7 +27,8 @@ app.listen(PORT, function() {
 });
 
 // Spoonacular API Routing
-const recipeRoutes = require('./routes/recipes');
-
+const recipeRoutes = require('./recipes.js');  
 app.use('/api/recipes', recipeRoutes);
+
+
 
