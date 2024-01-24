@@ -1,0 +1,11 @@
+{
+    "development": {
+      "username": "root",
+      "password": "1234",
+      "database": "recipe_database",
+      "host": "localhost",
+      "dialect": "mysql"
+    }
+  
+  }
+  
