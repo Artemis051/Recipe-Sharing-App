@@ -1,11 +1,12 @@
 {
     "development": {
-      "username": "root",
-      "password": "1234",
-      "database": "recipe_database",
-      "host": "localhost",
-      "dialect": "mysql"
-    }
+        "username": "root",
+        "password": "1234",
+        "database": "melting_pot",
+        "host": "localhost",
+        "dialect": "mysql",
+        "port": 3306
+      }
   
   }
   
