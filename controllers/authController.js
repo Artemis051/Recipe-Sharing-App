@@ -1,26 +1,31 @@
-const bcrypt = require('bcrypt'); //bycrypt is for hashing passwords, make it more secure
+const bcrypt = require('bcrypt'); // bcrypt is for hashing passwords, making them more secure
 const { User } = require('../models'); 
 
-const authController = { //here we're defining the loging function
+const authController = {
+  // Defining the login function
   login: async (req, res) => {
     const { username, password } = req.body;
 
     try {
-      const user = await User.findOne({ where: { username } });// this searches for the user in the db to see if they exit
+      // Search for the user in the database to see if they exist
+      const user = await User.findOne({ where: { username } });
 
-      if (user && bcrypt.compareSync(password, user.password)) {//if user is found in db..
-    
-        req.session.userId = user.id; // then store the user info for the session
-        res.redirect('/dashboard'); // and redirect them to the main page with the recipes
-      } else { //if the user is not found in the db..
-        res.render('login', { error: 'Invalid username or password' }); //then render this message
+      // If the user is found in the database and the password is correct
+      if (user && bcrypt.compareSync(password, user.password)) {
+        req.session.userId = user.id; // Store the user info for the session
+        res.redirect('/dashboard'); // Redirect them to the main page with the recipes
+      } else {
+        // If the user is not found in the database or the password is incorrect
+        res.render('login', { error: 'Invalid username or password' }); // Render this message
       }
-    } catch (error) { //and log the error in the console
+    } catch (error) {
+      // Log the error in the console
       console.error(error);
-      res.status(500).send('Error'); 
+      res.status(500).send('Error');
     }
   },
 
+  // Defining the signup function
   signup: async (req, res) => {
     const { username, email, password } = req.body;
 
@@ -34,18 +39,21 @@ const authController = { //here we're defining the loging function
       // Hash the password before storing it in the database
       const hashedPassword = bcrypt.hashSync(password, 10);
 
-      // this code is for creating a new user
-      const newUser = await User.create({ username, email, password: hashedPassword }); //once users give us this info for their account,
+      // Creating a new user
+      const newUser = await User.create({ username, email, password: hashedPassword });
 
-      // then redirect them to the login page
+      // Redirect them to the login page
       res.redirect('/login');
     } catch (error) {
+      // Log the error in the console
       console.error(error);
       res.status(500).send('Error');
     }
   },
 
-  logout: (req, res) => { // when the user presses 'logout' the session is destroyed
+  // Defining the logout function
+  logout: (req, res) => {
+    // When the user presses 'logout', the session is destroyed
     req.session.destroy((err) => {
       res.redirect('/login');
     });
@@ -53,4 +61,3 @@ const authController = { //here we're defining the loging function
 };
 
 module.exports = authController;
-
