@@ -1,6 +1,7 @@
 const express = require('express');
+const { Recipe, Dashboard } = require('../models');
 const exphbs = require('express-handlebars');
-const session = require('express-session'); // Add this line for session middleware
+const session = require('express-session'); 
 const { sequelize } = require('./models');
 const authMiddleware = require('./middleware/authMiddleware');
 const PORT = process.env.PORT || 4000;
