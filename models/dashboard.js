@@ -1,17 +1,14 @@
-// models/dashboard.js
-
 const { DataTypes } = require('sequelize');
-const sequelize = require('./index');
 
-const Dashboard = sequelize.define('Dashboard', {
-  // Define the columns of dashboard table
-  title: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
+module.exports = (sequelize) => {
+  const Dashboard = sequelize.define('Dashboard', {
+    title: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    // Add other fields as needed
+  });
 
-});
+  return Dashboard;
+};
 
-
-
-module.exports = Dashboard;
