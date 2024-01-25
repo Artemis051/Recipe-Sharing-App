@@ -1,12 +1,14 @@
-const express = require('express');
+const express = require('express');//import express and create router
 const router = express.Router();
 
-// Define routes for recipes
-router.get('/', (req, res) => {
+// define routes for recipes
+
+
+router.get('/', (req, res) => { //this route gets all recipes
   res.send('Get all recipes');
 });
 
-router.get('/:id', (req, res) => {
+router.get('/:id', (req, res) => { //this route will get a recipe based on the ID
   const recipeId = req.params.id;
   res.send(`Get recipe with ID ${recipeId}`);
 });
@@ -20,7 +22,7 @@ router.put('/:id', (req, res) => {
   res.send(`Update recipe with ID ${recipeId}`);
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', (req, res) => { //DELETE a recipe based on id
   const recipeId = req.params.id;
   res.send(`Delete recipe with ID ${recipeId}`);
 });
