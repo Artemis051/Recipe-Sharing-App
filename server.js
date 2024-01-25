@@ -1,14 +1,21 @@
+//entry point for server
+//import our modules
 const express = require('express');
-const { Recipe, Dashboard } = require('../models');
+// const { sequelize } = require('./models');
+const sequelize = require ('./config/connection')
 const exphbs = require('express-handlebars');
-const session = require('express-session'); 
-const { sequelize } = require('./models');
+const session = require('express-session');
 const authMiddleware = require('./middleware/authMiddleware');
-const PORT = process.env.PORT || 4000;
+const routes = require('./controllers/recipeController');
+const dashboardRoutes = require('./routes/dashboardRoutes'); // Replace with your actual dashboard routes
+const recipeRoutes = require('./routes/recipes.js');// Spoonacular API Routing
+const PORT = process.env.PORT || 3001;
 const apiKey = process.env.SPOONACULAR_API_KEY;
-const app = express();
+
+
 require('dotenv').config();
 
+const app = express();
 
 // Set up Handlebars
 const hbs = exphbs.create({
@@ -22,7 +29,7 @@ app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
 app.use(session({
-  secret: 'd13fc423adf058a0d3b351b5166a29c5', 
+  secret: process.env.SESSION_SECRET, 
   resave: false,
   saveUninitialized: true,
 }));
@@ -30,16 +37,11 @@ app.use(session({
 // Serve static files from the public directory
 app.use(express.static('public'));
 
-// Import routes
-const routes = require('./controllers/recipeController');
 app.use(routes);
 
 // use authMiddleware to protect the dashboard route
-const dashboardRoutes = require('./routes/dashboardRoutes'); // Replace with your actual dashboard routes
 app.use('/dashboard', authMiddleware, dashboardRoutes);
 
-// Spoonacular API Routing
-const recipeRoutes = require('./routes/recipes.js');  
 app.use('/api/recipes', recipeRoutes);
 
 // Sync the database and start the server
@@ -47,4 +49,6 @@ sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => {
     console.log(`Server listening on http://localhost:${PORT}`);
   });
+}).catch((error) => {
+  console.error('Error syncing database:', error);
 });
