@@ -1,8 +1,8 @@
-//entry point for server
-//import our modules
+// entry point for server
+// import our modules
 const express = require('express');
 // const { sequelize } = require('./models');
-const sequelize = require ('./config/connection')
+const sequelize = require('./config/connection')
 const exphbs = require('express-handlebars');
 const session = require('express-session');
 const authMiddleware = require('./middleware/authMiddleware');
@@ -52,3 +52,5 @@ sequelize.sync({ force: false }).then(() => {
 }).catch((error) => {
   console.error('Error syncing database:', error);
 });
+
+
