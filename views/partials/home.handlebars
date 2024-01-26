@@ -1,0 +1,16 @@
+<h1>Welcome to the Recipe Sharing App!</h1>
+
+{{#if isAuthenticated}}
+    <p>Hello, {{user.name}}! Here are the latest recipes:</p>
+    <div class="recipes-list">
+        {{#each recipes}}
+            <div class="recipe-preview">
+                <h2>{{this.title}}</h2>
+                <p>{{this.description}}</p>
+                <a href="/recipes/{{this.id}}">Read more...</a>
+            </div>
+        {{/each}}
+    </div>
+{{else}}
+    <p>Welcome to our community of food enthusiasts. Please <a href="/users/login">login</a> or <a href="/users/register">register</a> to share and view recipes.</p>
+{{/if}}

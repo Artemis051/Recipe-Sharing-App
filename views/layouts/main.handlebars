@@ -5,7 +5,35 @@
   <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
-  {{{body}}}
-  <script src="/js/script.js"></script>
+    <header>
+        <!-- Navigation bar -->
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <!-- Only show these links if the user is not logged in -->
+                {{#unless isAuthenticated}}
+                <li><a href="/users/login">Login</a></li>
+                <li><a href="/users/register">Register</a></li>
+                {{/unless}}
+                <!-- Only show these links if the user is logged in -->
+                {{#if isAuthenticated}}
+                <li><a href="/users/logout">Logout</a></li>
+                <li><a href="/recipes/new">Add Recipe</a></li>
+                {{/if}}
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Content unique to each page will go here -->
+        {{{body}}}
+    </main>
+
+    <footer>
+        <p>&copy; {{currentYear}} Recipe Sharing App</p>
+    </footer>
+
+    <!-- Link to your main JavaScript file -->
+    <script src="/js/script.js"></script>
 </body>
 </html>
