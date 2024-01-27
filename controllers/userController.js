@@ -23,7 +23,7 @@ const userController = {
       const newUser = await User.create({ username, email, password: hashedPassword });
 
       // now the new user can be redirected them to the login page
-      res.redirect('/login');
+      res.redirect('/user/login');
     } catch (error) {
       console.error(error);
       res.status(500).send('Error');
@@ -44,7 +44,7 @@ const userController = {
         attributes: { exclude: ['password'] }, // Exclude password from the response
       });// get user data from the database
 
-      
+
       res.render('profile', { user });
     } catch (error) {
       console.error(error);

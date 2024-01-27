@@ -4,11 +4,11 @@ const dashboardController = { //here we're creating a controller object to handl
   display: async (req, res) => { //estblish the disply function for dashboard
     try { //error handling block
       // Fetch all recipes from the database
-      const recipes = await Recipe.findAll();
-
+      const recipes = await Recipe.findAll({ raw: true });
+      console.log("recipes", recipes)
       // Render the dashboard view with  list of recipes
       res.render('dashboard', { recipes });
-    } catch (error) { 
+    } catch (error) {
       console.error(error); //if there's an error log it
       res.status(500).send('Error'); //send this error message to user
     }

@@ -1,11 +1,11 @@
 const bcrypt = require('bcrypt'); // bcrypt is for hashing passwords, making them more secure
-const { User } = require('../models'); 
+const { User } = require('../models');
 
 const authController = {
   // Defining the login function
   login: async (req, res) => {
     const { username, password } = req.body;
-
+    console.log("login:", username);
     try {
       // Search for the user in the database to see if they exist
       const user = await User.findOne({ where: { username } });
