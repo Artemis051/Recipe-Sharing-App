@@ -6,10 +6,10 @@ const sequelize = require('./config/connection')
 const exphbs = require('express-handlebars');
 const session = require('express-session');
 const authMiddleware = require('./middleware/authMiddleware');
-const routes = require('./controllers/recipeController');
+//const routes = require('./controllers/recipeController');
 const dashboardRoutes = require('./routes/dashboardRoutes'); // Replace with your actual dashboard routes
 const recipeRoutes = require('./routes/recipes.js');// Spoonacular API Routing
-const userRoutes = require ('./routes')
+const userRoutes = require('./routes/userRoutes.js')
 const bodyParser = require('body-parser'); //import body-parser; parse json and url data from requests
 
 const PORT = process.env.PORT || 3001;
@@ -22,7 +22,7 @@ const app = express();
 
 //this is for the body parse middleware to parse url and json data 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extend:false}));
+app.use(bodyParser.urlencoded({ extend: false }));
 
 // Set up Handlebars
 const hbs = exphbs.create({
@@ -36,7 +36,7 @@ app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
 app.use(session({
-  secret: process.env.SESSION_SECRET, 
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true,
 }));
@@ -44,10 +44,11 @@ app.use(session({
 // Serve static files from the public directory
 app.use(express.static('public'));
 
-app.use(routes);
+//app.use(routes);
 app.use('/dashboard', authMiddleware, dashboardRoutes);// use authMiddleware to protect the dashboard route
+app.use('/recipes', recipeRoutes);
 app.use('/api/recipes', recipeRoutes);
-app.use('/user', userRoutes); 
+app.use('/user', userRoutes);
 
 // Sync the database and start the server
 sequelize.sync({ force: false }).then(() => {
@@ -57,5 +58,3 @@ sequelize.sync({ force: false }).then(() => {
 }).catch((error) => {
   console.error('Error syncing database:', error);
 });
-
-
