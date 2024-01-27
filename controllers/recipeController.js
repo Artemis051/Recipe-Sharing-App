@@ -26,7 +26,8 @@ const recipeController = {
     try {
       // this is for a form where users can fill out with title, ingredients, and instructions
       const { title, ingredients, instructions } = req.body;
-
+      // want to try and find a recipe that has a title equal to "title" and if one is found, do this:
+        // res.status(500).send({ status: -1, message: "Recipe already exists", recipes: recipes  });
       // this is for creating a new recipe in the db
       const newRecipe = await Recipe.create({
         title,
@@ -39,6 +40,13 @@ const recipeController = {
       console.error(error);
       res.status(500).send({ status: -1, message: "Error adding", recipes: null });
     }
+  },
+  delRecipe: async (req, res) => {
+    const recipeId = req.params.id;
+    // here is where we do a javascript access to the Recipe database 
+    Recipe.findByIdAndRemove( recipeId );
+    const recipes = await Recipe.findAll({ raw: true });
+    res.send({ status: 1, message: "Recipe Deleted", recipes: recipes });
   },
   putRecipe: async (req, res) => {
     try {

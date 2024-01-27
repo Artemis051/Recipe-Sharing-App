@@ -18,8 +18,10 @@
         <input type="text" name="instructions" id="instructions" />
     </div>
     <div>
-        <button>Add</button>
+        
         <input type="button" onClick="sendRecipe()" value="Save" />
+    
+        <input type="button" onClick="deleteRecipe()" value="Delete" /> 
     </div>
 </form>
 <div id="recipeList">
@@ -63,6 +65,10 @@
             renderRecipeList();
         }
         console.log("sendRecipe:", json);
+    }
+    const deleteRecipe = async (id) => {
+        const resp = await fetch("/api/recipes/" + id, {method: "DELETE"} );
+        const data = await resp.json(); 
     }
     const getRecipe = async (id) => {
         const resp = await fetch("/api/recipes/" + id);
