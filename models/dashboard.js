@@ -12,6 +12,7 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    // Add more as needed
   });
 
   return Dashboard;
