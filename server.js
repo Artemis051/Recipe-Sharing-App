@@ -9,6 +9,9 @@ const authMiddleware = require('./middleware/authMiddleware');
 const routes = require('./controllers/recipeController');
 const dashboardRoutes = require('./routes/dashboardRoutes'); // Replace with your actual dashboard routes
 const recipeRoutes = require('./routes/recipes.js');// Spoonacular API Routing
+const userRoutes = require ('./routes')
+const bodyParser = require('body-parser'); //import body-parser; parse json and url data from requests
+
 const PORT = process.env.PORT || 3001;
 const apiKey = process.env.SPOONACULAR_API_KEY;
 
@@ -16,6 +19,10 @@ const apiKey = process.env.SPOONACULAR_API_KEY;
 require('dotenv').config();
 
 const app = express();
+
+//this is for the body parse middleware to parse url and json data 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extend:false}));
 
 // Set up Handlebars
 const hbs = exphbs.create({
@@ -38,11 +45,9 @@ app.use(session({
 app.use(express.static('public'));
 
 app.use(routes);
-
-// use authMiddleware to protect the dashboard route
-app.use('/dashboard', authMiddleware, dashboardRoutes);
-
+app.use('/dashboard', authMiddleware, dashboardRoutes);// use authMiddleware to protect the dashboard route
 app.use('/api/recipes', recipeRoutes);
+app.use('/user', userRoutes); 
 
 // Sync the database and start the server
 sequelize.sync({ force: false }).then(() => {

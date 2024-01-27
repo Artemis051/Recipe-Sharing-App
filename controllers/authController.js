@@ -60,4 +60,12 @@ const authController = {
   },
 };
 
+
+/*\
+display: ...
+list_of_categories = ... 
+...
+res.render("./views/dashboard.js", {listOfCategories:list_of_categories })
+*/
+
 module.exports = authController;
