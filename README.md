@@ -50,7 +50,7 @@ Navigate to the deployed Heroku link or run the application locally to start usi
 
 ## Deployment
 
-This application is deployed on Heroku. [Click here](LINK-TO-DEPLOYED-APPLICATION) to visit the live application.
+This application is deployed on Heroku. [Click here](https://melting-pot-share-recipes-7d15cedd36d0.herokuapp.com/) to visit the live application.
 
 ## Screenshot
 
