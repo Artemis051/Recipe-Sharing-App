@@ -5,7 +5,7 @@ const authMiddleware = (req, res, next) => {
       return next();
     } else {
       // if user is not authenticated redirect them to the login page
-      res.redirect('/login');
+      res.redirect('/user/login');
     }
   };
   
