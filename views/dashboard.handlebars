@@ -1,40 +1,41 @@
 <h1>Dashboard:</h1>
 <style>
-    form {
-        margin-left: 10%;
-    }
+   
+     
 </style>
-<form method="post" action="recipes">
-    <div>
-        Title:<br />
-        <input type="text" name="title" id="title" />
-    </div>
-    <div>
-        Ingredients:<br />
-        <input type="text" name="ingredients" id="ingredients" />
-    </div>
-    <div>
-        Instructions:<br />
-        <input type="text" name="instructions" id="instructions" />
-    </div>
-    <div>
-        
-        <input type="button" onClick="sendRecipe()" value="Save" />
 
-        <input type="button" onClick="deleteRecipe({{id}})" value="Delete" />
-
-    
-        {{!-- <input type="button" onClick="deleteRecipe()" value="Delete" />  --}}
+<div class="dashboard-container">
+    <div class="recipe-form-container">
+        <form method="post" action="recipes">
+            <div>
+                Title:<br />
+                <input type="text" name="title" id="title" />
+            </div>
+            <div>
+                Ingredients:<br />
+                <input type="text" name="ingredients" id="ingredients" />
+            </div>
+            <div>
+                Instructions:<br />
+                <input type="text" name="instructions" id="instructions" />
+            </div>
+            <div>
+                <input type="button" onClick="sendRecipe()" value="Save" />
+                <input type="button" onClick="deleteRecipe({{id}})" value="Delete" />
+            </div>
+        </form>
     </div>
-</form>
-<div id="recipeList">
 
-    <ul class="people_list">
-        {{#each recipes}}
-        <li><a href='javascript:getRecipe({{id}})'>{{title}}</a></li>
-        {{/each}}
-
-    </ul>
+    <div class="recent-recipes-container">
+        <h2>Your Recipes</h2>
+        <div id="recipeList">
+            <ul class="people_list">
+                {{#each recipes}}
+                <li><a href='javascript:getRecipe({{id}})'>{{title}}</a></li>
+                {{/each}}
+            </ul>
+        </div>
+    </div>
 </div>
 <script>
     let recipeId = 0;
@@ -103,71 +104,3 @@
         <button type="submit">Search</button>
     </form>
 </div>
-
-<script>
-
- // Importing our required modules
-const express = require('express')
-const axios = require('axios')
-const exphbs = require('express-handlebars') // Import express-handlebars
-const app = express();
-const api_key = "My_API_Key"
-
-// Setting up Handlebars as our view engine
-app.engine('handlebars', exphbs());
-app.set('view engine', 'handlebars');
-
-// Serving static files from the 'public' directory
-app.use(express.static('public'))
-
-// Parsing incoming request bodies
-app.use(express.urlencoded({extended: false}))
-
-// Route to render the main search page
-app.get('/', (req, res) => {
-    res.render('index') // Ensure the view file is index.handlebars
-})
-
-// Route to handle the search query and fetch recipes
-app.post('/search', async (req, res) => {
-    const {query} = req.body;
-    const response = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?query=${query}&apiKey=${api_key}`)
-    const recipes = response.data.results
-    res.render('results', {recipes}) // Ensure the view file is results.handlebars
-})
-
-// Route to display a specific recipe's details
-app.get("/recipe/:id", async(req, res) => {
-    const {id} = req.params;
-    const response = await axios.get(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${api_key}`)
-    const recipe = response.data;
-    res.render('recipe', {recipe}) // Ensure the view file is recipe.handlebars
-})
-
-// Starting our server
-const PORT = 4000;
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`)
-})
-
-</script>
-
-<!-- Displaying the recipe title, image, ingredients, and instructions -->
-<div class="container">
-    <h1>{{recipe.title}}</h1>
-    <img src="{{recipe.image}}" alt="{{recipe.title}}" />
-    <h2> Ingredients </h2>
-    <ul>
-        {{#each recipe.extendedIngredients}}
-            <li>{{this.original}}</li>
-        {{/each}}
-    </ul>
-    <h2> Instructions</h2>
-    <ol>
-        {{#each recipe.analyzedInstructions.[0].steps}}
-            <li>{{this.step}}</li>
-        {{/each}}
-    </ol>
-</div>
-
-

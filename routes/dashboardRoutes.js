@@ -12,6 +12,26 @@ router.get('/test', async (req, res) => {
   const recipes = await models.Recipe.findAll();
   res.render('dashboard', { recipes: recipes });
 });
+router.get('/search', authMiddleware, (req, res) => {
+  res.render('search');
+});
+
+// Route to handle the search query and fetch recipes
+router.post('/search', authMiddleware, async (req, res) => {
+  try {
+    const { query } = req.body;
+    const recipes = await models.Recipe.findAll({
+      where: {
+        // Define your search criteria based on your Recipe model
+        // Example: title: { [Op.like]: `%${query}%` }
+      },
+    });
+    res.render('dashboard', { recipes });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error');
+  }
+});
 
 router.get('/', authMiddleware, dashController.display)
 

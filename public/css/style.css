@@ -4,53 +4,105 @@ body {
     background-color: #f0f0f0;
     font-family: 'Arial', sans-serif;
     color: #333;
-  }
-  
-  .container {
-    max-width: 600px;
-    margin: 50px auto;
+    background-image: url('../shutterstock_2418465425.jpg');
+    background-size: cover;
+}
+
+.dashboard-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.recipe-form-container {
+    margin-right: 10%;
+}
+
+.search-container {
+    margin-top: 20px;
+}
+
+.form-container,
+.recent-recipes-container,
+.recipe-list-container {
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .auth-form {
     margin-top: 20px;
-  }
-  
-  form {
+}
+
+.form-container {
+    max-width: 600px;
+    margin: 50px auto 20px; /* Adjusted margin */
+}
+
+h1 {
+    text-align: center; 
+}
+
+form {
     display: flex;
     flex-direction: column;
-  }
-  
-  label {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.dashboard-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.recipe-form-container {
+    margin-right: 10%;
+}
+
+.recent-recipes-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    width: 40%;
+}
+label {
     margin-bottom: 8px;
-  }
-  
-  input {
-    padding: 10px;
+}
+
+input {
+    padding: 15px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
-  }
-  
-  button {
+    width: 100%;
+}
+
+button {
     background-color: #4caf50;
     color: #fff;
     padding: 10px 15px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #45a049;
-  }
-  
-  h1, h2 {
-    color: #333;
-  }
-  
+}
 
+button:hover {
+    background-color: #45a049;
+}
+
+.recipe-list ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.recipe-list li {
+    margin-bottom: 5px;
+}
+
+h1, h2 {
+    color: #333;
+}
