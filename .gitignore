@@ -1,3 +1,4 @@
 node_modules/
 .env
 SESSION_SECRET=d13fc423adf058a0d3b351b5166a29c5
+docker-compose.yaml
