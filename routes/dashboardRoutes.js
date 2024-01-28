@@ -18,8 +18,3 @@ router.get('/', authMiddleware, dashController.display)
 //router.get('/auth', authController.login )
 
 module.exports = router;
-
-
-
-
-
