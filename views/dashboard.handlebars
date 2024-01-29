@@ -1,4 +1,4 @@
-<h1>Dashboard:</h1>
+{{!-- <h1>Dashboard:</h1> --}}
 
 <div class="dashboard-container">
     <div class="recipe-form-container">
@@ -174,16 +174,13 @@
 
 <!-- Recipe Search Form -->
 <div class="search-form-container">
-    
-  
     <h1>Recipe Search</h1>
         <input type="text" name="query" id="query" placeholder="Search for a recipe ..." />
         <button type="submit" onClick="searchAPIrecipes()">Search</button>
-      
-    
+          
 </div>
 <!-- Search Results/List of Recipes -->
-<div class="container">
+<div id="searchResultsContainer" class="container">
     <h1>Search Results</h1>
     
     <a href="/">Back to home</a>
