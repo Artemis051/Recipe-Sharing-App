@@ -25,13 +25,12 @@ const authController = {
       //   res.render('login', { error: 'Invalid username or password' }); // Render this message
       // }
     } catch (error) {
-      // Log the error in the console
       console.error(error);
       res.status(500).send('Error');
     }
   },
 
-  // Defining the signup function
+  // Defining the signup function 
   signup: async (req, res) => {
     const { username, email, password } = req.body;
 

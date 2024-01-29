@@ -30,3 +30,4 @@ module.exports = (sequelize) => {
 
   return User;
 };
+
