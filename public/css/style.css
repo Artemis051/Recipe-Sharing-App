@@ -34,7 +34,7 @@ body {
 
 .form-container {
     max-width: 600px;
-    margin: 50px auto 20px; /* Adjusted margin */
+    margin: 50px auto 20px; 
 }
 
 h1 {
@@ -48,6 +48,7 @@ form {
     padding: 40px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 60px;
 }
 .dashboard-container {
     display: flex;
@@ -104,5 +105,5 @@ button:hover {
 }
 
 h1, h2 {
-    color: #333;
+    color: #0f0f14;
 }

@@ -22,6 +22,22 @@ const recipeController = {
       res.status(500).send('Error');
     }
   },
+  delRecipe: async (req, res) => {
+    try {
+      const recipeId = req.params.id;
+      await Recipe.destroy({
+        where: {
+          id: recipeId,
+        },
+      });
+      const recipes = await Recipe.findAll();
+      res.send({ status: 1, message: 'Recipe Deleted', recipes:recipes });
+    } catch (error) {
+      console.error(error);
+      res.status(500).send({ status: -1, message: 'Error deleting recipe' });
+    }
+  },
+  
   postRecipe: async (req, res) => {
     try {
       // this is for a form where users can fill out with title, ingredients, and instructions
@@ -41,22 +57,9 @@ const recipeController = {
       res.status(500).send({ status: -1, message: "Error adding", recipes: null });
     }
   },
-
-  delRecipe: async (req, res) => {
-    try {
-      const recipeId = req.params.id;
-      await Recipe.destroy({
-        where: {
-          id: recipeId,
-        },
-      });
   
-      res.send({ status: 1, message: 'Recipe Deleted' });
-    } catch (error) {
-      console.error(error);
-      res.status(500).send({ status: -1, message: 'Error deleting recipe' });
-    }
-  },
+
+  
   
   // delRecipe: async (req, res) => {
   //   const recipeId = req.params.id;
@@ -89,8 +92,36 @@ const recipeController = {
       console.error(error);
       res.status(500).send({ status: -1, message: "Error saving", recipes: null });
     }
+  }, 
+  searchRecipes: async (req, res) => {
+    try {
+      const recipes = await Recipe.findAll();
+      res.send(recipes);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Error');
+    }
   }
 }
+
+/*
+putRecipe: async (req, res) => {
+  try {
+    const id = req.params.id;
+    const { title, ingredients, instructions } = req.body;
+    await Recipe.update({ title, ingredients, instructions }, {
+      where: {
+        id,
+      },
+    });
+    const recipes = await Recipe.findAll({ raw: true });
+    res.send({ status: 1, message: 'Recipe Updated', recipes });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ status: -1, message: 'Error saving', recipes: null });
+  }
+},
+*/
 // Defining routes for recipe functions
 
 
