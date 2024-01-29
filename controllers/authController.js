@@ -16,9 +16,10 @@ const authController = {
         res.redirect('/dashboard'); // Redirect them to the main page with the recipes
       } else {
         // Redirect to the signup page if the user is not found
-        res.redirect('http://localhost:3001/user/register');
-
+        res.redirect('/user/register');
       }
+
+      console.log("Redirecting to registration page");
       // } else {
       //   // If the user is not found in the database or the password is incorrect
       //   res.render('login', { error: 'Invalid username or password' }); // Render this message

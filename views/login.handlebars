@@ -10,9 +10,10 @@
 
 <body>
   <div class="container">
-    <h1>Welcome to the Melting Pot!</h1>
+    {{!-- <h1>Welcome to the Melting Pot!</h1> --}}
     <div class="auth-form">
       <form action="/user/login" method="post">
+      <h1>Welcome to the Melting Pot!</h1>
         <h2>Login</h2>
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" required>
@@ -21,8 +22,9 @@
         <input type="password" id="password" name="password" required>
 
         <button type="submit">Login</button>
+        <div><a href="/user/register">Register</a></div>
       </form>
-
+      
     </div>
   </div>
 </body>

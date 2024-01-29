@@ -5,7 +5,7 @@ const dashController = require('../controllers/dashboardController');
 const authMiddleware = require('../middleware/authMiddleware'); // Import authMiddleware
 const authController = require('../controllers/authController');
 // const authController = require('./controllers/authController.js');
-const Dashboard = require('../models/dashboard');//import models/Dashboard
+//const Dashboard = require('../models/dashboard');//import models/Dashboard
 const models = require('../models')
 // routes for dashboard, this will fetch data and render the dashboard so users can see recipes
 router.get('/test', async (req, res) => {
