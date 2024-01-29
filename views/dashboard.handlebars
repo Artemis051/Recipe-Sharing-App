@@ -128,6 +128,7 @@
     }
 </script>
 
+<!-- Recipe Search Form -->
 <div class="container">
     <h1>Recipe Search</h1>
     <form action="/search" method="POST">
@@ -135,3 +136,53 @@
         <button type="submit">Search</button>
     </form>
 </div>
+<!-- Search Results/List of Recipes -->
+<div class="container">
+    <h1>Search Results</h1>
+    <ul class="recipe-list">
+      {{#each recipes}}
+        <li>
+          <a href="/recipe/{{this.id}}">
+            <div class="recipe-card">
+              <img class="recipe-image" src="{{this.image}}" alt="{{this.title}}">
+              <h2 class="recipe-title">{{this.title}}</h2>
+            </div>
+          </a>
+        </li>
+      {{/each}}
+    </ul>
+    <a href="/">Back to home</a>
+</div>
+
+<script>
+    //JavaScript for the front end goes here
+
+const express = require('express');
+const axios = require('axios');
+const app = express();
+const api_key = 'My_API_Key';
+// Middleware to parse request body
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+// Route for search/fetch
+app.post('/search', async (req, res) => {
+    const { query } = req.body;
+    const response = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?query=${query}&apiKey=${MY_API_Key}`);
+    const recipes = response.data.results;
+    res.render('results', { recipes });
+});
+// Start the server
+const port = 3001;
+app.listen(port, () => {
+    console.log(`Server running on http://localhost:${port}`);
+});
+
+
+
+
+
+
+
+
+
+</script>

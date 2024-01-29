@@ -44,6 +44,9 @@ app.use(session({
 // Serve static files from the public directory
 app.use(express.static('public'));
 
+app.get("/", (req, res)=>{
+  res.send("Hello");
+})
 //app.use(routes);
 app.use('/dashboard', authMiddleware, dashboardRoutes);// use authMiddleware to protect the dashboard route
 app.use('/recipes', recipeRoutes);
