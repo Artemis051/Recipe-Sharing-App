@@ -55,7 +55,8 @@ https://melting-pot-share-recipes-7d15cedd36d0.herokuapp.com/user/login
 
 ## Screenshot
 
-![jpeg_image-4ee0-a9d2-99-0_720](https://github.com/Artemis051/Recipe-Sharing-App/assets/145396887/058cde3d-4a43-4cb1-913e-82f102dd2e14)
+![Screenshot 2024-01-29 at 5 52 58 PM](https://github.com/Artemis051/Recipe-Sharing-App/assets/145396887/85d5470a-5ad5-4a30-be44-33908b4dc1ba)
+
 
 
 
