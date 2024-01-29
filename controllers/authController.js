@@ -15,9 +15,14 @@ const authController = {
         req.session.userId = user.id; // Store the user info for the session
         res.redirect('/dashboard'); // Redirect them to the main page with the recipes
       } else {
-        // If the user is not found in the database or the password is incorrect
-        res.render('login', { error: 'Invalid username or password' }); // Render this message
+        // Redirect to the signup page if the user is not found
+        res.redirect('http://localhost:3001/user/register');
+
       }
+      // } else {
+      //   // If the user is not found in the database or the password is incorrect
+      //   res.render('login', { error: 'Invalid username or password' }); // Render this message
+      // }
     } catch (error) {
       // Log the error in the console
       console.error(error);
@@ -59,13 +64,5 @@ const authController = {
     });
   },
 };
-
-
-/*\
-display: ...
-list_of_categories = ... 
-...
-res.render("./views/dashboard.js", {listOfCategories:list_of_categories })
-*/
 
 module.exports = authController;

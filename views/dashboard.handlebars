@@ -1,35 +1,41 @@
 <h1>Dashboard:</h1>
 <style>
-    form {
-        margin-left: 10%;
-    }
+   
+     
 </style>
-<form method="post" action="recipes">
-    <div>
-        Title:<br />
-        <input type="text" name="title" id="title" />
-    </div>
-    <div>
-        Ingredients:<br />
-        <input type="text" name="ingredients" id="ingredients" />
-    </div>
-    <div>
-        Instructions:<br />
-        <input type="text" name="instructions" id="instructions" />
-    </div>
-    <div>
-        <button>Add</button>
-        <input type="button" onClick="sendRecipe()" value="Save" />
-    </div>
-</form>
-<div id="recipeList">
 
-    <ul class="people_list">
-        {{#each recipes}}
-        <li><a href='javascript:getRecipe({{id}})'>{{title}}</a></li>
-        {{/each}}
+<div class="dashboard-container">
+    <div class="recipe-form-container">
+        <form method="post" action="recipes">
+            <div>
+                Title:<br />
+                <input type="text" name="title" id="title" />
+            </div>
+            <div>
+                Ingredients:<br />
+                <input type="text" name="ingredients" id="ingredients" />
+            </div>
+            <div>
+                Instructions:<br />
+                <input type="text" name="instructions" id="instructions" />
+            </div>
+            <div>
+                <input type="button" onClick="sendRecipe()" value="Save" />
+                <input type="button" onClick="deleteRecipe({{id}})" value="Delete" />
+            </div>
+        </form>
+    </div>
 
-    </ul>
+    <div class="recent-recipes-container">
+        <h2>Your Recipes</h2>
+        <div id="recipeList">
+            <ul class="people_list">
+                {{#each recipes}}
+                <li><a href='javascript:getRecipe({{id}})'>{{title}}</a></li>
+                {{/each}}
+            </ul>
+        </div>
+    </div>
 </div>
 <script>
     let recipeId = 0;
@@ -64,6 +70,11 @@
         }
         console.log("sendRecipe:", json);
     }
+    const deleteRecipe = async (id) => {
+    const resp = await fetch("/api/recipes/" + id, { method: "DELETE" });
+    const data = await resp.json();
+    console.log("Delete Recipe Response:", data);
+}
     const getRecipe = async (id) => {
         const resp = await fetch("/api/recipes/" + id);
         const data = await resp.json();
@@ -85,3 +96,11 @@
         recipeList.innerHTML = list + "</ul>";
     }
 </script>
+
+<div class="container">
+    <h1>Recipe Search</h1>
+    <form action="/search" method="POST">
+        <input type="text" name="query" placeholder="Search for a recipe ..." />
+        <button type="submit">Search</button>
+    </form>
+</div>
