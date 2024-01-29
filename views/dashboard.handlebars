@@ -1,8 +1,4 @@
 <h1>Dashboard:</h1>
-<style>
-   
-     
-</style>
 
 <div class="dashboard-container">
     <div class="recipe-form-container">
@@ -46,6 +42,8 @@
     const recipeList = document.getElementById("recipeList");
     const buttonDelete = document.getElementById("deleteButton");
     const sendRecipeButton= document.getElementById("sendRecipeButton");
+    const apiKey = "{{apiKey}}";
+    console.log("API KEY:", apiKey);
     buttonDelete.disabled=true;
     let recipes;
     const sendRecipe = async () => {
@@ -126,59 +124,91 @@
         ingredients.value = "";
         instructions.value ="";
     }
+    let GV_API_RESULTS;
+    const searchAPIrecipes = async ()=>{
+        
+        const query = document.getElementById("query").value;
+        const url = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&query=${query}`;
+        console.log("URL",url);
+        const resp = await fetch (url);
+        const text = await resp.text();
+        console.log("TEXT:", text);
+        const json = JSON.parse(text);
+        GV_API_RESULTS=json.results;
+        console.log("JSON:", json.results);
+        displayResults(GV_API_RESULTS);
+    }
+    function displayResults(results) {
+        const container = document.querySelector('.container');
+        const resultsContainer = document.createElement('div');
+        resultsContainer.id = 'results';
+        container.appendChild(resultsContainer);
+        results.slice(0, 5).forEach(result => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <img src="${result.image}" alt="${result.title}">
+                <h3>${result.title}</h3>
+                <button onclick="openRecipe(${result.id})">View Recipe</button>
+            `;
+            resultsContainer.appendChild(card);
+        });
+    }
+    function openRecipe(id)
+    {
+        window.open("/recipes/api/"+id);
+    }
+    const openRecipe1=async(id) =>{
+        // ?apiKey=${apiKey}&
+        const url = `https://api.spoonacular.com/recipes/${id}/information?apiKey=${apiKey}`;
+
+        const resp = await fetch (url);
+        const text = await resp.text();
+
+        const json = JSON.parse(text);
+
+        //window.location.href = `/recipe.html?id=${id}`;
+    }
+
 </script>
 
 <!-- Recipe Search Form -->
-<div class="container">
+<div class="search-form-container">
+    
+  
     <h1>Recipe Search</h1>
-    <form action="/search" method="POST">
-        <input type="text" name="query" placeholder="Search for a recipe ..." />
-        <button type="submit">Search</button>
-    </form>
+        <input type="text" name="query" id="query" placeholder="Search for a recipe ..." />
+        <button type="submit" onClick="searchAPIrecipes()">Search</button>
+      
+    
 </div>
 <!-- Search Results/List of Recipes -->
 <div class="container">
     <h1>Search Results</h1>
-    <ul class="recipe-list">
-      {{#each recipes}}
-        <li>
-          <a href="/recipe/{{this.id}}">
-            <div class="recipe-card">
-              <img class="recipe-image" src="{{this.image}}" alt="{{this.title}}">
-              <h2 class="recipe-title">{{this.title}}</h2>
-            </div>
-          </a>
-        </li>
-      {{/each}}
-    </ul>
+    
     <a href="/">Back to home</a>
 </div>
 
 <script>
-    //JavaScript for the front end goes here
 
-const express = require('express');
-const axios = require('axios');
-const app = express();
-const api_key = 'My_API_Key';
-// Middleware to parse request body
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-// Route for search/fetch
-app.post('/search', async (req, res) => {
-    const { query } = req.body;
-    const response = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?query=${query}&apiKey=${MY_API_Key}`);
-    const recipes = response.data.results;
-    res.render('results', { recipes });
+/*
+document.addEventListener("DOMContentLoaded", function() {
+    const form = document.querySelector('form');
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const query = document.querySelector('input[name="query"]').value;
+        searchRecipes(query);
+    });
 });
-// Start the server
-const port = 3001;
-app.listen(port, () => {
-    console.log(`Server running on http://localhost:${port}`);
-});
-
-
-
+function searchRecipes(query) {
+    const apiKey = 'My_API_Key';
+    const url = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&query=${query}`;
+    fetch(url)
+        .then(response => response.json())
+        .then(data => displayResults(data.results))
+        .catch(error => console.error('Error:', error));
+}
+*/
 
 
 
@@ -186,3 +216,4 @@ app.listen(port, () => {
 
 
 </script>
+

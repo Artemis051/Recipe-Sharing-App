@@ -7,6 +7,20 @@ body {
     background-image: url('../shutterstock_2418465425.jpg');
     background-size: cover;
 }
+.register-link {
+    display: inline-block;
+    margin-top: 10px;
+    text-decoration: none;
+    color: #fff;
+    background-color: #4caf50;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.register-link:hover {
+    background-color: #45a049;
+}
 
 .dashboard-container {
     display: flex;
@@ -68,6 +82,12 @@ form {
     margin-top: 20px;
     width: 40%;
 }
+
+.search-form-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
 label {
     margin-bottom: 8px;
 }

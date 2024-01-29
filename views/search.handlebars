@@ -1,18 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recipe Search</title>
-
-    <style>
-        /* need to add some styling here */
-    </style>
-</head>
-<body>
 {{!-- search form  --}}
-<form id="recipe-search-form">
+<h1>Search Recipes:</h1>
+<form id="recipe-search-form" method="post" action="/search-recipes">
     <input type="text" name="query" placeholder="Search for recipes...">
     <button type="submit">Search</button>
 </form>
@@ -37,8 +25,5 @@
         });
     });
 </script>
-
-</body>
-</html>
 
 

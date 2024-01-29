@@ -93,10 +93,18 @@ const recipeController = {
       res.status(500).send({ status: -1, message: "Error saving", recipes: null });
     }
   }, 
-  searchRecipes: async (req, res) => {
+  getAPIRecipe: async (req, res) => {
     try {
-      const recipes = await Recipe.findAll();
-      res.send(recipes);
+        const id = req.params.id;
+        const apiKey =  process.env.My_API_Key;
+        const url = `https://api.spoonacular.com/recipes/${id}/information?apiKey=${apiKey}`;
+        console.log(url);
+        const resp = await fetch (url);
+        const text = await resp.text();
+        console.log("TEXT:", text);
+        const json = JSON.parse(text);
+        console.log(json);
+        res.render("recipe-api", {recipe:json})
     } catch (error) {
       console.error(error);
       res.status(500).send('Error');

@@ -5,9 +5,9 @@ const dashboardController = { //here we're creating a controller object to handl
     try { //error handling block
       // Fetch all recipes from the database
       const recipes = await Recipe.findAll({ raw: true });
-      console.log("recipes", recipes)
+      console.log("recipes", recipes, process.env.My_API_Key)
       // Render the dashboard view with  list of recipes
-      res.render('dashboard', { recipes });
+      res.render('dashboard', { recipes, apiKey: process.env.My_API_Key });
     } catch (error) {
       console.error(error); //if there's an error log it
       res.status(500).send('Error'); //send this error message to user
@@ -18,3 +18,4 @@ const dashboardController = { //here we're creating a controller object to handl
 module.exports = dashboardController;
 
 //here we're defining the display function. taking code from out db and displaying it so the user can see it on their dashbaord
+
