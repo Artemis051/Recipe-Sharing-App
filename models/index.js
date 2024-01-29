@@ -1,7 +1,7 @@
 const { Sequelize } = require('sequelize');
 const sequelize = require ("../config/connection")
 const RecipeModel = require('./recipe');
-const DashboardModel = require('./dashboard');
+//const DashboardModel = require('./dashboard');
 const UserModel = require('./user');
 
 // const { DB_NAME, DB_USER, DB_PASSWORD, DB_HOST } = process.env;
@@ -13,12 +13,12 @@ const UserModel = require('./user');
 // });
 
 const Recipe = RecipeModel(sequelize);
-const Dashboard = DashboardModel(sequelize);
+//const Dashboard = DashboardModel(sequelize);
 const User = UserModel(sequelize);
 
 module.exports = {
     Recipe,
-    Dashboard,
+   // Dashboard,
     User,
     sequelize
 };

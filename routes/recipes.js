@@ -13,6 +13,8 @@ router.put('/:id', controller.putRecipe);
 
 router.delete('/:id', controller.delRecipe );
 
+router.post('/search-recipes', controller.searchRecipes); // this is for getting recipes from the API
+
 module.exports = router;
 
 // const express = require('express');//import express and create router

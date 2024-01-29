@@ -1,27 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Search</title>
+
+    <style>
+        /* need to add some styling here */
+    </style>
+</head>
+<body>
+{{!-- search form  --}}
 <form id="recipe-search-form">
     <input type="text" name="query" placeholder="Search for recipes...">
     <button type="submit">Search</button>
 </form>
 
-<div id="search-results">
-    <!-- Search results will be displayed here -->
-</div>
+<!-- Search results will be displayed here -->
+<div id="search-results"></div>
 
 <script>
-document.getElementById('recipe-search-form').addEventListener('submit', async function(e) {
-    e.preventDefault();
-    const query = this.query.value;
-    const response = await fetch(`/api/recipes/search?q=${query}`);
-    const data = await response.json();
+    document.getElementById('recipe-search-form').addEventListener('submit', async function (e) {
+        e.preventDefault();
+        const query = this.query.value;
+        const response = await fetch(`/api/recipes/search?q=${query}`);
+        const data = await response.json();
 
-    const resultsContainer = document.getElementById('search-results');
-    resultsContainer.innerHTML = ''; // Clear previous results
+        const resultsContainer = document.getElementById('search-results');
+        resultsContainer.innerHTML = ''; 
 
-    data.results.forEach(recipe => {
-        const div = document.createElement('div');
-        div.innerHTML = `<h3>${recipe.title}</h3><img src="${recipe.image}" alt="${recipe.title}">`;
-        resultsContainer.appendChild(div);
+        data.results.forEach(recipe => {
+            const div = document.createElement('div');
+            div.innerHTML = `<h3>${recipe.title}</h3><img src="${recipe.image}" alt="${recipe.title}">`;
+            resultsContainer.appendChild(div);
+        });
     });
-});
 </script>
+
+</body>
+</html>
+
 

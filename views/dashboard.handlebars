@@ -20,8 +20,9 @@
                 <input type="text" name="instructions" id="instructions" />
             </div>
             <div>
-                <input type="button" onClick="sendRecipe()" value="Save" />
-                <input type="button" onClick="deleteRecipe({{id}})" value="Delete" />
+                <input type="button" onClick="sendRecipe()" id="sendRecipeButton" value="Add" />
+                <input type="button" onClick="deleteRecipe(0)" id="deleteButton" value="Delete" />
+                <input type="button" onClick="clearForm()" id="clearButton" value="Clear" />
             </div>
         </form>
     </div>
@@ -31,7 +32,7 @@
         <div id="recipeList">
             <ul class="people_list">
                 {{#each recipes}}
-                <li><a href='javascript:getRecipe({{id}})'>{{title}}</a></li>
+                <li><a href='javascript:deleteRecipe({{id}})'>[X]</a> - <a href='javascript:getRecipe({{id}})'>{{title}}</a></li>
                 {{/each}}
             </ul>
         </div>
@@ -43,6 +44,9 @@
     const ingredients = document.getElementById("ingredients");
     const instructions = document.getElementById("instructions");
     const recipeList = document.getElementById("recipeList");
+    const buttonDelete = document.getElementById("deleteButton");
+    const sendRecipeButton= document.getElementById("sendRecipeButton");
+    buttonDelete.disabled=true;
     let recipes;
     const sendRecipe = async () => {
         const data = {
@@ -71,10 +75,27 @@
         console.log("sendRecipe:", json);
     }
     const deleteRecipe = async (id) => {
-    const resp = await fetch("/api/recipes/" + id, { method: "DELETE" });
-    const data = await resp.json();
-    console.log("Delete Recipe Response:", data);
-}
+        console.log("deleteRecipe:", id);
+        if(id!==0)
+        {
+            recipeId=id;
+        }
+        if(recipeId===0)
+        {
+            return;
+        }
+        const resp = await fetch("/api/recipes/" + recipeId, { method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+            }
+         });
+        const data = await resp.json();
+        recipes=data.recipes;
+
+        console.log("Delete Recipe Response:", data);
+        renderRecipeList();
+        clearForm();
+    }
     const getRecipe = async (id) => {
         const resp = await fetch("/api/recipes/" + id);
         const data = await resp.json();
@@ -83,17 +104,27 @@
         title.value = data.title;
         ingredients.value = data.ingredients;
         instructions.value = data.instructions;
+        buttonDelete.disabled=false;
+        sendRecipeButton.value="Save";
     }
     const renderRecipeList = () => {
         let list = '<ul class="people_list">';
 
         for (let r of recipes) {
             console.log(r);
-            const li = `<li><a href='javascript:getRecipe(${r.id})'>${r.title}</a></li>`;
+            const li = `<li><a href='javascript:deleteRecipe(${r.id})'>[X]</a> - <a href='javascript:getRecipe(${r.id})'>${r.title}</a></li>`;
             list += li;
         }
         console.log(list)
         recipeList.innerHTML = list + "</ul>";
+    }
+    const clearForm = ()=>{
+        sendRecipeButton.value="Add";
+        buttonDelete.disabled=true;
+        recipeId =0;
+        title.value = "";
+        ingredients.value = "";
+        instructions.value ="";
     }
 </script>
 
