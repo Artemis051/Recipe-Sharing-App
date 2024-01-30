@@ -1,6 +1,7 @@
-
+// Importing the necessary DataTypes from Sequelize
 const { DataTypes } = require('sequelize');
 
+// Defines the Recipe Model
 module.exports = (sequelize) => {
   const Recipe = sequelize.define('Recipe', {
     id: {
@@ -23,27 +24,6 @@ module.exports = (sequelize) => {
     },
   });
 
+  //Returns the defined Recipe model
   return Recipe;
 };
-
-
-
-// const express = require('express');
-// const axios = require('axios');
-// const router = express.Router();
-
-// router.get('/search', async (req, res) => {
-//     try {
-//         const query = req.query.q; 
-//         const apiKey = process.env.SPOONACULAR_API_KEY;
-//         const url = `https://api.spoonacular.com/recipes/complexSearch?query=${query}&apiKey=${apiKey}`;
-        
-//         const response = await axios.get(url);
-//         res.json(response.data); 
-//     } catch (error) {
-//         console.error(error);
-//         res.status(500).send('An error occurred while fetching recipes');
-//     }
-// });
-
-// module.exports = router;
