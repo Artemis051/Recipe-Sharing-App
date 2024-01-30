@@ -1,5 +1,7 @@
 const { DataTypes } = require('sequelize');
 
+
+//Defines User Model
 module.exports = (sequelize) => {
   const User = sequelize.define('User', {
     id: {
@@ -28,6 +30,7 @@ module.exports = (sequelize) => {
     
   }, {});
 
+  //Returns the defined User model
   return User;
 };
 
