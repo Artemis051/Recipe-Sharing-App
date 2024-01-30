@@ -4,8 +4,7 @@ const router = express.Router();
 const dashController = require('../controllers/dashboardController');
 const authMiddleware = require('../middleware/authMiddleware'); // Import authMiddleware
 const authController = require('../controllers/authController');
-// const authController = require('./controllers/authController.js');
-//const Dashboard = require('../models/dashboard');//import models/Dashboard
+
 const models = require('../models')
 // routes for dashboard, this will fetch data and render the dashboard so users can see recipes
 router.get('/test', async (req, res) => {
@@ -23,7 +22,6 @@ router.post('/search', authMiddleware, async (req, res) => {
     const recipes = await models.Recipe.findAll({
       where: {
         // Define your search criteria based on your Recipe model
-        // Example: title: { [Op.like]: `%${query}%` }
       },
     });
     res.render('dashboard', { recipes });
@@ -34,8 +32,6 @@ router.post('/search', authMiddleware, async (req, res) => {
 });
 
 router.get('/', authMiddleware, dashController.display)
-
-//router.get('/auth', authController.login )
 
 module.exports = router;
 
