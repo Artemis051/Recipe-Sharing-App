@@ -1,4 +1,4 @@
-{{!-- <h1>Dashboard:</h1> --}}
+
 
 <div class="dashboard-container">
     <div class="recipe-form-container">
@@ -167,7 +167,6 @@
 
         const json = JSON.parse(text);
 
-        //window.location.href = `/recipe.html?id=${id}`;
     }
 
 </script>
@@ -185,32 +184,4 @@
     
     <a href="/">Back to home</a>
 </div>
-
-<script>
-
-/*
-document.addEventListener("DOMContentLoaded", function() {
-    const form = document.querySelector('form');
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        const query = document.querySelector('input[name="query"]').value;
-        searchRecipes(query);
-    });
-});
-function searchRecipes(query) {
-    const apiKey = 'My_API_Key';
-    const url = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&query=${query}`;
-    fetch(url)
-        .then(response => response.json())
-        .then(data => displayResults(data.results))
-        .catch(error => console.error('Error:', error));
-}
-*/
-
-
-
-
-
-
-</script>
 
